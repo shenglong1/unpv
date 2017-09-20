@@ -1,6 +1,7 @@
 /* include signal */
 #include	"unp.h"
 
+// mask nothing
 Sigfunc *
 signal(int signo, Sigfunc *func)
 {

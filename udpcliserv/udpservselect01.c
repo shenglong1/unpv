@@ -1,6 +1,7 @@
 /* include udpservselect01 */
 #include	"unp.h"
 
+// 同时监听tcp/udp sockfd
 int
 main(int argc, char **argv)
 {

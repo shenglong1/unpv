@@ -1,6 +1,7 @@
 /* include tcp_connect */
 #include	"unp.h"
 
+// cli socket/connect
 int
 tcp_connect(const char *host, const char *serv)
 {
@@ -13,7 +14,7 @@ tcp_connect(const char *host, const char *serv)
 
 	if ( (n = getaddrinfo(host, serv, &hints, &res)) != 0)
 		err_quit("tcp_connect error for %s, %s: %s",
-				 host, serv, gai_strerror(n));
+						 host, serv, gai_strerror(n));
 	ressave = res;
 
 	do {

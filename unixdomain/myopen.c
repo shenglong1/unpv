@@ -1,5 +1,6 @@
 #include	"unp.h"
 
+// 在多个进程之间传递fd
 int
 my_open(const char *pathname, int mode)
 {
@@ -13,6 +14,7 @@ my_open(const char *pathname, int mode)
 		Close(sockfd[0]);
 		snprintf(argsockfd, sizeof(argsockfd), "%d", sockfd[1]);
 		snprintf(argmode, sizeof(argmode), "%d", mode);
+    // todo: send fd to other proc
 		execl("./openfile", "openfile", argsockfd, pathname, argmode,
 			  (char *) NULL);
 		err_sys("execl error");

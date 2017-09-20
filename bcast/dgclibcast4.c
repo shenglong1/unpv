@@ -2,6 +2,7 @@
 
 static void	recvfrom_alarm(int);
 
+// 用pselect解决竞争问题
 void
 dg_cli(FILE *fp, int sockfd, const SA *pservaddr, socklen_t servlen)
 {

@@ -17,10 +17,10 @@ str_cli(FILE *fp, int sockfd)
 
 	kq = Kqueue();
 	ts.tv_sec = ts.tv_nsec = 0;
-	Kevent(kq, kev, 2, NULL, 0, &ts);
+	Kevent(kq, kev, 2, NULL, 0, &ts); // set
 
 	for ( ; ; ) {
-		nev = Kevent(kq, NULL, 0, kev, 2, NULL);
+		nev = Kevent(kq, NULL, 0, kev, 2, NULL); // get, wait
 
 		for (i = 0; i < nev; i++) {
 			if (kev[i].ident == sockfd) {	/* socket is readable */

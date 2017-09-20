@@ -15,6 +15,7 @@ loop(int sockfd, socklen_t salen)
 
 	sa = Malloc(salen);
 
+	// recv from grp and print
 	for ( ; ; ) {
 		len = salen;
 		n = Recvfrom(sockfd, &buf, sizeof(buf) - 1, 0, sa, &len);

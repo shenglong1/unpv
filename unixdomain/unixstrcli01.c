@@ -1,5 +1,6 @@
 #include	"unp.h"
 
+// unix socket(stream) + accept/fork, client
 int
 main(int argc, char **argv)
 {

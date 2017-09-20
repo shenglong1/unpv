@@ -10,6 +10,7 @@
 #define	IFI_NAME	16			/* same as IFNAMSIZ in <net/if.h> */
 #define	IFI_HADDR	 8			/* allow for 64-bit EUI-64 in future */
 
+// ioctl 中关于interface的接口结构
 struct ifi_info {
   char    ifi_name[IFI_NAME];	/* interface name, null-terminated */
   short   ifi_index;			/* interface index */

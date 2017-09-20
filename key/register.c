@@ -1,6 +1,7 @@
 #include "unp.h"
 #include <net/pfkeyv2.h>
 
+// 秘钥套接字动态维护安全关联
 /* include sadb_register */
 void
 sadb_register(int type)

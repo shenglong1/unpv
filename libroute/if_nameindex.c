@@ -33,7 +33,7 @@ if_nameindex(void)
 					namptr -= sdl->sdl_nlen + 1;
 					strncpy(namptr, &sdl->sdl_data[0], sdl->sdl_nlen);
 					namptr[sdl->sdl_nlen] = 0;	/* null terminate */
-					ifptr->if_name = namptr;
+					ifptr->if_name = namptr; // 从左向右存放name
 					ifptr->if_index = sdl->sdl_index;
 					ifptr++;
 				}

@@ -1,6 +1,8 @@
 #ifndef	__addrinfo_h
 #define	__addrinfo_h
 
+#include <stddef.h>
+
 /*
  * Everything here really belongs in <netdb.h>.
  * These defines are separate for now, to avoid having to modify the

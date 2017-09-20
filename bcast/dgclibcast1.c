@@ -2,6 +2,7 @@
 
 static void	recvfrom_alarm(int);
 
+// dg_cli 192.168.1.255 发送广播数据报
 void
 dg_cli(FILE *fp, int sockfd, const SA *pservaddr, socklen_t servlen)
 {
@@ -33,7 +34,7 @@ dg_cli(FILE *fp, int sockfd, const SA *pservaddr, socklen_t servlen)
 			} else {
 				recvline[n] = 0;	/* null terminate */
 				printf("from %s: %s",
-						Sock_ntop_host(preply_addr, len), recvline);
+						Sock_ntop_host(preply_addr, len), recvline); // print remote
 			}
 		}
 	}

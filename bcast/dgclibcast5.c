@@ -1,6 +1,8 @@
 #include	"unp.h"
 #include	<setjmp.h>
 
+// 用sigsetjmp/siglongjmp 解决竞争问题
+// 这里做到了只要alarm一触发，必然jmp中断所有流程
 static void			recvfrom_alarm(int);
 static sigjmp_buf	jmpbuf;
 
@@ -25,8 +27,8 @@ dg_cli(FILE *fp, int sockfd, const SA *pservaddr, socklen_t servlen)
 
 		alarm(5);
 		for ( ; ; ) {
-			if (sigsetjmp(jmpbuf, 1) != 0)
-				break;
+			if (sigsetjmp(jmpbuf, 1) != 0) // 首次调用设置jmpbuf点，返回0
+				break; // 带有返回值的jmp到这里终止for
 			len = servlen;
 			n = Recvfrom(sockfd, recvline, MAXLINE, 0, preply_addr, &len);
 			recvline[n] = 0;	/* null terminate */

@@ -3,37 +3,38 @@
 
 static void	connect_alarm(int);
 
+// alarm interrupt connect
 int
 connect_timeo(int sockfd, const SA *saptr, socklen_t salen, int nsec)
 {
-	Sigfunc	*sigfunc;
-	int		n;
+  Sigfunc	*sigfunc;
+  int		n;
 
-	sigfunc = Signal(SIGALRM, connect_alarm);
-	if (alarm(nsec) != 0)
-		err_msg("connect_timeo: alarm was already set");
+  sigfunc = Signal(SIGALRM, connect_alarm); // 先挂好信号处理
+  if (alarm(nsec) != 0) // 开启时钟signal
+    err_msg("connect_timeo: alarm was already set");
 
-	if ( (n = connect(sockfd, saptr, salen)) < 0) {
-		close(sockfd);
-		if (errno == EINTR)
-			errno = ETIMEDOUT;
-	}
-	alarm(0);					/* turn off the alarm */
-	Signal(SIGALRM, sigfunc);	/* restore previous signal handler */
+  if ( (n = connect(sockfd, saptr, salen)) < 0) {
+    close(sockfd);
+    if (errno == EINTR) // 被中断
+      errno = ETIMEDOUT;
+  }
+  alarm(0);					/* turn off the alarm */
+  Signal(SIGALRM, sigfunc);	/* restore previous signal handler */
 
-	return(n);
+  return(n);
 }
 
 static void
 connect_alarm(int signo)
 {
-	return;		/* just interrupt the connect() */
+  return;		/* just interrupt the connect() */
 }
 /* end connect_timeo */
 
 void
 Connect_timeo(int fd, const SA *sa, socklen_t salen, int sec)
 {
-	if (connect_timeo(fd, sa, salen, sec) < 0)
-		err_sys("connect_timeo error");
+  if (connect_timeo(fd, sa, salen, sec) < 0)
+    err_sys("connect_timeo error");
 }

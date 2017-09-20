@@ -1,5 +1,6 @@
 #include	"unp.h"
 
+// tcp server
 void
 str_echo(int sockfd)
 {

@@ -1,5 +1,6 @@
 #include	"unp.h"
 
+// udp client, get from fp, send to sockfd
 void
 dg_cli(FILE *fp, int sockfd, const SA *pservaddr, socklen_t servlen)
 {

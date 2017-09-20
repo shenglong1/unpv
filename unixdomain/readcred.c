@@ -2,6 +2,7 @@
 
 #define	CONTROL_LEN	(sizeof(struct cmsghdr) + sizeof(struct cmsgcred))
 
+// unix socket中，强行format cmsghdr 为cmsgcred
 ssize_t
 read_cred(int fd, void *ptr, size_t nbytes, struct cmsgcred *cmsgcredptr)
 {

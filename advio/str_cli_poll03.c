@@ -31,7 +31,7 @@ str_cli(FILE *fp, int sockfd)
 		dopoll.dp_timeout = -1;
 		dopoll.dp_nfds = 2;
 		dopoll.dp_fds = pollfd;
-		result = Ioctl(wfd, DP_POLL, &dopoll);
+		result = Ioctl(wfd, DP_POLL, &dopoll); // wait here
 
 		/* loop through ready file descriptors */
 		for (i = 0; i < result; i++) {

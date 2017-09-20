@@ -1,6 +1,8 @@
 /* include nonb1 */
 #include	"unp.h"
 
+// 手动模拟的sendbuff/recvbuff
+// 两条线的select 有条件加入监听
 void
 str_cli(FILE *fp, int sockfd)
 {
@@ -19,8 +21,9 @@ str_cli(FILE *fp, int sockfd)
 	val = Fcntl(STDOUT_FILENO, F_GETFL, 0);
 	Fcntl(STDOUT_FILENO, F_SETFL, val | O_NONBLOCK);
 
-	toiptr = tooptr = to;	/* initialize buffer pointers */
-	friptr = froptr = fr;
+	/* initialize buffer pointers */
+	toiptr = tooptr = to; // send buff
+	friptr = froptr = fr; // recv buff
 	stdineof = 0;
 
 	maxfdp1 = max(max(STDIN_FILENO, STDOUT_FILENO), sockfd) + 1;

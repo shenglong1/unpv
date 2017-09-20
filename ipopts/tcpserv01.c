@@ -25,6 +25,7 @@ main(int argc, char **argv)
 
 	Signal(SIGCHLD, sig_chld);
 
+	// accept fork
 	for ( ; ; ) {
 		clilen = sizeof(cliaddr);
 		if ( (connfd = accept(listenfd, (SA *) &cliaddr, &clilen)) < 0) {

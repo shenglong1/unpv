@@ -1,4 +1,6 @@
 #include	"unp.h"
+#include "../key/unp.h"
+#include "../sctp/unp.h"
 
 int
 main(int argc, char **argv)

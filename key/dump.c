@@ -1,6 +1,7 @@
 #include "unp.h"
 #include <net/pfkeyv2.h>
 
+// 秘钥安全套接字
 /* include sadb_dump */
 void
 sadb_dump(int type)
@@ -10,7 +11,7 @@ sadb_dump(int type)
 	struct sadb_msg msg;
 	int goteof;
 
-	s = Socket(PF_KEY, SOCK_RAW, PF_KEY_V2);
+	s = Socket(PF_KEY, SOCK_RAW, PF_KEY_V2); // only SOCK_RAW, 只能用原始套接字
 
 	/* Build and write SADB_DUMP request */
 	bzero(&msg, sizeof(msg));

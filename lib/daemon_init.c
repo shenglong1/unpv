@@ -5,6 +5,8 @@
 
 extern int	daemon_proc;	/* defined in error.c */
 
+// 标准的守护进程流程
+// double fork and setsid
 int
 daemon_init(const char *pname, int facility)
 {

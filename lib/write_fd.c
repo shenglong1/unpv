@@ -1,6 +1,7 @@
 /* include write_fd */
 #include	"unp.h"
 
+// how to send fd to other process by msghdr.control
 ssize_t
 write_fd(int fd, void *ptr, size_t nbytes, int sendfd)
 {
@@ -17,6 +18,7 @@ write_fd(int fd, void *ptr, size_t nbytes, int sendfd)
 	msg.msg_control = control_un.control;
 	msg.msg_controllen = sizeof(control_un.control);
 
+	// set msghdr.cmsghdr
 	cmptr = CMSG_FIRSTHDR(&msg);
 	cmptr->cmsg_len = CMSG_LEN(sizeof(int));
 	cmptr->cmsg_level = SOL_SOCKET;

@@ -1,6 +1,8 @@
 /* include get_ifi_info1 */
 #include	"unpifi.h"
 
+// todo: 获取本地全量的接口信息
+// get ifi_info by ioctl
 struct ifi_info *
 get_ifi_info(int family, int doaliases)
 {
@@ -38,6 +40,7 @@ get_ifi_info(int family, int doaliases)
 /* end get_ifi_info1 */
 
 /* include get_ifi_info2 */
+	// 处理每一个ifreq成为一个ifi_info
 	for (ptr = buf; ptr < buf + ifc.ifc_len; ) {
 		ifr = (struct ifreq *) ptr;
 
@@ -73,14 +76,14 @@ get_ifi_info(int family, int doaliases)
 			continue;	/* ignore if not desired address family */
 
 		myflags = 0;
-		if ( (cptr = strchr(ifr->ifr_name, ':')) != NULL)
+		if ( (cptr = strchr(ifr->ifr_name, ':')) != NULL) // 有冒号的仅比较到冒号为止
 			*cptr = 0;		/* replace colon with null */
 		if (strncmp(lastname, ifr->ifr_name, IFNAMSIZ) == 0) {
 			if (doaliases == 0)
 				continue;	/* already processed this interface */
 			myflags = IFI_ALIAS;
 		}
-		memcpy(lastname, ifr->ifr_name, IFNAMSIZ);
+		memcpy(lastname, ifr->ifr_name, IFNAMSIZ); // 保存到lastname给下次比较
 
 		ifrcopy = *ifr;
 		Ioctl(sockfd, SIOCGIFFLAGS, &ifrcopy);
@@ -90,9 +93,10 @@ get_ifi_info(int family, int doaliases)
 /* end get_ifi_info2 */
 
 /* include get_ifi_info3 */
+		// 这里的ifipnext是当前ifi_info链表的空位
 		ifi = Calloc(1, sizeof(struct ifi_info));
 		*ifipnext = ifi;			/* prev points to this new one */
-		ifipnext = &ifi->ifi_next;	/* pointer to next one goes here */
+		ifipnext = &ifi->ifi_next;	/* pointer to next one goes here */ ifipnext移动到下一个空位
 
 		ifi->ifi_flags = flags;		/* IFF_xxx values */
 		ifi->ifi_myflags = myflags;	/* IFI_xxx values */

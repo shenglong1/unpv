@@ -1,6 +1,7 @@
 #include	"unpifi.h"
 #include	"unproute.h"
 
+// get ifi_info by sysctl
 /* include get_ifi_info1 */
 struct ifi_info *
 get_ifi_info(int family, int doaliases)
@@ -14,7 +15,7 @@ get_ifi_info(int family, int doaliases)
 	struct sockaddr_dl	*sdl;
 	struct ifi_info		*ifi, *ifisave, *ifihead, **ifipnext;
 
-	buf = Net_rt_iflist(family, 0, &len);
+	buf = Net_rt_iflist(family, 0, &len); // get interface info by sysctl
 
 	ifihead = NULL;
 	ifipnext = &ifihead;
@@ -22,11 +23,11 @@ get_ifi_info(int family, int doaliases)
 	lim = buf + len;
 	for (next = buf; next < lim; next += ifm->ifm_msglen) {
 		ifm = (struct if_msghdr *) next;
-		if (ifm->ifm_type == RTM_IFINFO) {
+		if (ifm->ifm_type == RTM_IFINFO) { // 其后有一个SA, 数据链路套接字SA
 			if ( ((flags = ifm->ifm_flags) & IFF_UP) == 0)
 				continue;	/* ignore if interface not up */
 
-			sa = (struct sockaddr *) (ifm + 1);
+			sa = (struct sockaddr *) (ifm + 1); // 取if_msghdr后的第一个SA
 			get_rtaddrs(ifm->ifm_addrs, sa, rti_info);
 			if ( (sa = rti_info[RTAX_IFP]) != NULL) {
 				ifi = Calloc(1, sizeof(struct ifi_info));
@@ -52,7 +53,7 @@ get_ifi_info(int family, int doaliases)
 /* end get_ifi_info1 */
 
 /* include get_ifi_info3 */
-		} else if (ifm->ifm_type == RTM_NEWADDR) {
+		} else if (ifm->ifm_type == RTM_NEWADDR) { // 其后有多个SA, 接口地址，网络掩码，广播地址
 			if (ifi->ifi_addr) {	/* already have an IP addr for i/f */
 				if (doaliases == 0)
 					continue;

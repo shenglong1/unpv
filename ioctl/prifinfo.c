@@ -1,5 +1,6 @@
 #include	"unpifi.h"
 
+// ioctl, print ifi_info
 int
 main(int argc, char **argv)
 {

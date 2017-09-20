@@ -3,6 +3,7 @@
 #include	<netinet/ip_var.h>
 #include	<netinet/udp_var.h>		/* for UDPCTL_xxx constants */
 
+// 使用sysctl获得参数：udp校验和是否开启
 int
 main(int argc, char **argv)
 {

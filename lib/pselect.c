@@ -9,6 +9,7 @@
 /* include pselect */
 #include	"unp.h"
 
+// 带有mask屏蔽和超时
 int
 pselect(int nfds, fd_set *rset, fd_set *wset, fd_set *xset,
 		const struct timespec *ts, const sigset_t *sigmask)

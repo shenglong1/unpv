@@ -2,6 +2,7 @@
 
 static void	recvfrom_alarm(int);
 
+// 一个错误的示例
 void
 dg_cli(FILE *fp, int sockfd, const SA *pservaddr, socklen_t servlen)
 {
@@ -29,7 +30,7 @@ dg_cli(FILE *fp, int sockfd, const SA *pservaddr, socklen_t servlen)
 		for ( ; ; ) {
 			len = servlen;
 			Sigprocmask(SIG_UNBLOCK, &sigset_alrm, NULL);
-			n = recvfrom(sockfd, recvline, MAXLINE, 0, preply_addr, &len);
+			n = recvfrom(sockfd, recvline, MAXLINE, 0, preply_addr, &len); // 希望alarm触发在recvfrom调用上
 			Sigprocmask(SIG_BLOCK, &sigset_alrm, NULL);
 			if (n < 0) {
 				if (errno == EINTR)

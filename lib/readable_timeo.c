@@ -1,6 +1,7 @@
 /* include readable_timeo */
 #include	"unp.h"
 
+// udp + select
 int
 readable_timeo(int fd, int sec)
 {

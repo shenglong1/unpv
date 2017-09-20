@@ -1,5 +1,6 @@
 #include	"unp.h"
 
+// 两个进程分别阻塞在自己的第一个io上
 void
 str_cli(FILE *fp, int sockfd)
 {

@@ -12,7 +12,7 @@ main(int argc, char **argv)
 	cliaddr.sun_family = AF_LOCAL;
 	strcpy(cliaddr.sun_path, tmpnam(NULL));
 
-	Bind(sockfd, (SA *) &cliaddr, sizeof(cliaddr));
+	Bind(sockfd, (SA *) &cliaddr, sizeof(cliaddr)); // unix socket 必须bind
 
 	bzero(&servaddr, sizeof(servaddr));	/* fill in server's address */
 	servaddr.sun_family = AF_LOCAL;

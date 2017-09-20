@@ -5,8 +5,9 @@ static int	read_cnt;
 static char	*read_ptr;
 static char	read_buf[MAXLINE];
 
+// return 1 and 1 char
 static ssize_t
-my_read(int fd, char *ptr)
+my_read(int fd, char *ptr) // 先读到read_buff中，一次my_read返回一个字符
 {
 
 	if (read_cnt <= 0) {

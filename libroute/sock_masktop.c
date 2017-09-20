@@ -1,5 +1,6 @@
 #include	"unproute.h"
 
+// 路由套接字????
 const char *
 sock_masktop(SA *sa, socklen_t salen)
 {

@@ -5,6 +5,7 @@
 
 void	loop(int, socklen_t);
 
+// 多播下的一个会话接收器
 int
 main(int argc, char **argv)
 {
@@ -20,7 +21,7 @@ main(int argc, char **argv)
 	else
 		err_quit("usage: mysdr <mcast-addr> <port#> <interface-name>");
 
-	Setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
+	Setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on)); // 使多个相同进程可以共用这个port
 	Bind(sockfd, sa, salen);
 
 	Mcast_join(sockfd, sa, salen, (argc == 4) ? argv[3] : NULL, 0);

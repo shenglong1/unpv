@@ -3,6 +3,9 @@
 void	recv_all(int, socklen_t);
 void	send_all(int, SA *, socklen_t);
 
+// 多播：发送和接收
+// send socketfd bind none;
+// recv socketfd bind sasend, join group sasend
 int
 main(int argc, char **argv)
 {
@@ -14,7 +17,7 @@ main(int argc, char **argv)
 	if (argc != 3)
 		err_quit("usage: sendrecv <IP-multicast-address> <port#>");
 
-	sendfd = Udp_client(argv[1], argv[2], (void **) &sasend, &salen);
+	sendfd = Udp_client(argv[1], argv[2], (void **) &sasend, &salen); // create sendsocketfd and return an addr
 
 	recvfd = Socket(sasend->sa_family, SOCK_DGRAM, 0);
 

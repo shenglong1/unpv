@@ -1,6 +1,7 @@
 /* include tcp_listen */
 #include	"unp.h"
 
+// server socket/bind/listen
 int
 tcp_listen(const char *host, const char *serv, socklen_t *addrlenp)
 {

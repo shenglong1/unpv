@@ -3,7 +3,7 @@
 #ifdef	HAVE_SOCKADDR_DL_STRUCT
 #include	<net/if_dl.h>
 #endif
-
+// compare generic sockaddr
 int
 sock_cmp_addr(const struct sockaddr *sa1, const struct sockaddr *sa2,
 			 socklen_t salen)

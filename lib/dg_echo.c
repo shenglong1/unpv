@@ -1,5 +1,6 @@
 #include	"unp.h"
 
+// echo server
 void
 dg_echo(int sockfd, SA *pcliaddr, socklen_t clilen)
 {

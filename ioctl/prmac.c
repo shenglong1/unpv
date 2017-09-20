@@ -1,6 +1,7 @@
 #include	"unpifi.h"
 #include	<net/if_arp.h>
 
+// 获取arp interface信息
 int
 main(int argc, char **argv)
 {
@@ -14,6 +15,7 @@ main(int argc, char **argv)
 	for (ifi = get_ifi_info(AF_INET, 0); ifi != NULL; ifi = ifi->ifi_next) {
 		printf("%s: ", Sock_ntop(ifi->ifi_addr, sizeof(struct sockaddr_in)));
 
+		// 对每一个interface，用其ifi_info.ifi_addr放到arpreq中去获得该地址的arp信息
 		sin = (struct sockaddr_in *) &arpreq.arp_pa;
 		memcpy(sin, ifi->ifi_addr, sizeof(struct sockaddr_in));
 

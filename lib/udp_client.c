@@ -1,6 +1,7 @@
 /* include udp_client */
 #include	"unp.h"
 
+// 获取本地接口返回到saptr
 int
 udp_client(const char *host, const char *serv, SA **saptr, socklen_t *lenp)
 {

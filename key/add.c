@@ -35,6 +35,7 @@ prefix_all(struct sockaddr *sa)
 	}
 }
 
+// 秘钥套接字中增加一个完整的SADB表项
 /* include sadb_add */
 void
 sadb_add(struct sockaddr *src, struct sockaddr *dst, int type, int alg,

@@ -1,5 +1,6 @@
 #include	"unp.h"
 
+// 写FIN返回RST，写RST返回SIGPIPE
 void
 str_cli(FILE *fp, int sockfd)
 {

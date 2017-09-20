@@ -2,6 +2,7 @@
 
 int		my_open(const char *, int);
 
+// 在多个进程之间传递fd
 int
 main(int argc, char **argv)
 {

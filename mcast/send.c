@@ -3,6 +3,7 @@
 
 #define	SENDRATE	5		/* send one datagram every five seconds */
 
+// sendto one group
 void
 send_all(int sendfd, SA *sadest, socklen_t salen)
 {

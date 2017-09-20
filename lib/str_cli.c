@@ -1,5 +1,6 @@
 #include	"unp.h"
 
+// tcp client
 void
 str_cli(FILE *fp, int sockfd)
 {
